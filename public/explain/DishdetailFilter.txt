@@ -1,0 +1,40 @@
+// DishDetal 
+        // truyền dish
+        // xác định món ăn được chọn => tạo thêm state selectDish khởi tạo state ban đầu là null
+            // chuyển selectDish từ Menu sang Main => xóa trong Menu
+            // cắt onSelectDish khởi Menu => chuyển sang Main
+                // => selectDish cũng dk theo dõi bởi Main
+        // => điều đó sẽ dk cung cấp cho Disdetail
+        // vì selectDish chỉ theo dõi 1 dish.id , nên dishDetail sẽ dk lấy thông tin từ DISHES
+            // => sử dụng toán tử mảng để trích xuất chi tiết của selectDish
+        // trong Dishdetail dưới ren der
+            // truyền vào trong dish 1 mảng this.state.dishes
+            // trong mảng this.state.dishes, chọn ra 1 dish cụ thể mà dish đó khớp với selectDish
+                // sử dụng filter
+                    // lấy dish làm tham số , sau đó lấy nó làm state cho mảng this.state.dishes
+                    // sử dụng hàm filter cho cả mảng
+                    // => filter cho mảng ở state này
+                // khi sử dụng filter, filter sẽ chạy trên từng dish trong mảng dish
+                    // truy cập vào từng dish
+                // đối với mỗi dish
+                    // check dish.id khớp với state của selectDish (món ăn đã chọn)
+                // => giúp ta chọn ra tất cả các món ăn mà món ăn đó khớp với món đã chọn
+                // hàm filter lọc mảng con của các món ăn mà mảng con chứa thay vào đó
+            // chỉ nhận dk 1 món ăn, vì id là duy nhất
+                // vì filter cung cấp nó dưới dạng 1 mảng
+                    // => chọn mục đầu tiên từ mảng này
+                    
+
+    // onClick Trong Menu
+        // truyền onSelectDish vào menu
+        // tại render -> Menu thêm onClick = giá trị onClick trong MenuComponent
+        // tại MenuComponent , thay giá trị onClick = props (this.props.onClick)
+            // props.onClick được truyền từ onClick ở Menu trong Main
+        // Những gì mong đợi với onClick là lấy được dishId
+            // k cần toàn bộ món ăn, vì nó có trong state dishes
+            // => những gì cần lấy chỉ là dishId ở state của menucomponent của dishId của selectedDish
+                // dishId = MenuComponent.selectedDish.dishId
+            // lấy dishId làm tham số cho phương thức onClick tại đây
+        // => chuyển onClick dưới dạng props vào menuComponent
+            // khi onclick dk gọi, sẽ chuyển tham số dishId dưới dạng tham số cho onSelectDish
+        // => selectDish ở state chỉ theo dõi 1 dish.id
