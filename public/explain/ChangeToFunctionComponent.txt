@@ -1,0 +1,28 @@
+MenuComponent
+    Xóa bỏ những gì không cần thiết
+        class , Component, render
+
+    Lấy ra đoạn hiển thị Card và biến nó thành function Component của riêng nó
+        define function RenderMenuItem
+            nhận dish (props) và onClick dưới dạng tham số
+            return 1 view 
+                là đoạn Card ở trên đã lấy ra
+                hàm onClick 
+
+    vì RenderMenuItem function chỉ đơn giản là hiển thị item menu đó dựa trên thông tin món ăn mà nó dk gửi cũng dựa trên click chuột mà nó đã gửi
+    nó sẽ đảm bảo view dk hiển thị ở dịnh dạng card của reactstrap
+
+    define Menu với tham số props
+        tạo 1 mảng menu = cách map tất cả DISHES (props.dishes) dk ánh xạ từ Main 
+        với tham số dish
+            return về 1 div với key = dish.id classname = col-12 col-sm-5
+                giá trị trong div là function RenderMenuItem được tạo ở trên
+                    với 2 tham số
+                    dish = dish (tham số của hàm map)
+                    onClick = props.onClick (được gửi tới Main mà ta parse render component menu dưới dạng hàm ở RenderMenuItem function)
+        => menu ở đây là 1 loạt danh sách dish được map từ DISHES sắp xếp dưới dạng layout của function RenderMenuItem
+        render trang web với kiểu container row
+
+** giải thích hàm map dk dùng trong các bài tập Funix
+tạo 1 hàm mới với 1 danh sách dish được map từ DISHES
+sau đó sắp xếp nó dưới dạng layout của function RenderMenuItem ( dạng Card reactstrap)
