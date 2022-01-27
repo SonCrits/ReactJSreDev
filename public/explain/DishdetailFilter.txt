@@ -22,7 +22,9 @@
                 // hàm filter lọc mảng con của các món ăn mà mảng con chứa thay vào đó
             // chỉ nhận dk 1 món ăn, vì id là duy nhất
                 // vì filter cung cấp nó dưới dạng 1 mảng
-                    // => chọn mục đầu tiên từ mảng này
+                    // =>phải chọn mục đầu tiên từ mảng này
+        k thể dùng find vì sẽ ảnh hưởng tới hàm map của Dishdetail component
+                
                     
 
     // onClick Trong Menu
@@ -30,6 +32,8 @@
         // tại render -> Menu thêm onClick = giá trị onClick trong MenuComponent
         // tại MenuComponent , thay giá trị onClick = props (this.props.onClick)
             // props.onClick được truyền từ onClick ở Menu trong Main
+            nhận dish.id làm tham số.
+            onclick = {() => this.props.onClick(dish.id)}
         // Những gì mong đợi với onClick là lấy được dishId
             // k cần toàn bộ món ăn, vì nó có trong state dishes
             // => những gì cần lấy chỉ là dishId ở state của menucomponent của dishId của selectedDish
@@ -38,3 +42,4 @@
         // => chuyển onClick dưới dạng props vào menuComponent
             // khi onclick dk gọi, sẽ chuyển tham số dishId dưới dạng tham số cho onSelectDish
         // => selectDish ở state chỉ theo dõi 1 dish.id
+        onClick như một phần của props tới MenuComponent
