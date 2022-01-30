@@ -130,6 +130,9 @@ HeaderComponent.js
                     => phủ định lại nó
             Tạo ràng buộc cho toggleNav
                 bind nó vào constructor
+FooterComponent.js
+    import Link 
+    đổi các thẻ a thành Link và href = các component tương ứng
 
 
                 
