@@ -10,7 +10,7 @@ import {
 
 import {Link} from 'react-router-dom'
 
-function RenderMenuItem({dish,onClick}) {
+function RenderMenuItem ({dish,onClick}) {
   return(
     <Card>
       <Link to={`/menu/${dish.id}`}>
@@ -20,7 +20,7 @@ function RenderMenuItem({dish,onClick}) {
         </CardBody>
       </Link>
     </Card>
-  );
+  )
 }
 
 const Menu = (props) => {
@@ -49,6 +49,7 @@ const Menu = (props) => {
       </div>
     </div>
   )
+
 }
 
 export default Menu;
