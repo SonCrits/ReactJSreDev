@@ -33,10 +33,10 @@ function RenderComment({comments}) {
                 <p>{comment.comment}</p>
                 <p>
                   --{comment.author},
-                  {new Intl.DateTimeFormat("en-US",{
+                  {new Intl.DateTimeFormat('en-US',{
                     year : 'numeric',
-                    month: 'short',
-                    day : '2-digit'
+                    month : 'short',
+                    day : '2-digit',
                   }).format(new Date(Date.parse(comment.date)))}
                 </p>
               </li>
