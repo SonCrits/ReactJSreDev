@@ -4,7 +4,7 @@ import DishDetail from './DishdetailComponent';
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
-import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import { Redirect, Route, Switch,withRouter } from 'react-router-dom';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import {connect} from 'react-redux';
@@ -12,8 +12,8 @@ import {connect} from 'react-redux';
 const mapStateToProps = state => {
   return {
     dishes : state.dishes,
-    leaders : state.leaders,
     promotions : state.promotions,
+    leaders : state.leaders,
     comments : state.comments
   }
 }
