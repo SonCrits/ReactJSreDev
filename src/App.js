@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+    Navbar,
+    NavbarBrand
+} from 'reactstrap';
 
+import Home from './components/HomeComponent';
+  
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div >
+            <Navbar color="primary" dark expand="md">
+                <NavbarBrand href="/">Phần Mềm Quản Lý Nhân Sự V1.0</NavbarBrand> 
+            </Navbar>
+            <Home />
+        </div >
+    );
 }
-
+  
 export default App;
