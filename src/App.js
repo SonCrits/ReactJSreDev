@@ -1,20 +1,18 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-    Navbar,
-    NavbarBrand
-} from 'reactstrap';
-
 import Home from './components/HomeComponent';
-  
+import {BrowserRouter} from 'react-router-dom';
+import Main from './components/MainComponent';
+import './App.css';
+import 'font-awesome/css/font-awesome.min.css';
+
 function App() {
     return (
-        <div >
-            <Navbar color="primary" dark expand="md">
-                <NavbarBrand href="/">Phần Mềm Quản Lý Nhân Sự V1.0</NavbarBrand> 
-            </Navbar>
-            <Home />
-        </div >
+        <BrowserRouter>
+            <div>
+                <Main />
+            </div >
+        </BrowserRouter>
     );
 }
   
