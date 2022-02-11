@@ -1,16 +1,26 @@
 import React,{useState} from "react";
-import {STAFFS, DEPARTMENTS} from '../shared/staffs';
 import Header from "./HeaderComponent";
-import {Route, Routes,Navigate, useParams} from 'react-router-dom'
+import {Route, Routes,Navigate, useParams,} from 'react-router-dom'
 import Home from "./HomeComponent";
 import Footer from "./FooterComponent";
 import StaffInfo from "./StaffInfoComponent";
 import Department from "./DepartComponent";
 import Salary from "./SalaryComponent";
+import {connect} from 'react-redux';
 
-function Main() {
-    const [staffs, setStaffs] = useState(STAFFS);
-    const [departs, setDeparts] = useState(DEPARTMENTS);
+const mapStateToProps = state => {
+    return {
+        staffs : state.staffs,
+        departs : state.departs
+    }
+}
+
+function Main(props) {
+
+
+
+    const [staffs, setStaffs] = useState(props.staffs);
+    const [departs, setDeparts] = useState(props.staffs);
 
     const HomePage = () => {
         return(
@@ -45,4 +55,4 @@ function Main() {
     )
 }
 
-export default Main;
+export default connect(mapStateToProps)(Main) ;
