@@ -12,6 +12,14 @@ function Main() {
     const [staffs, setStaffs] = useState(STAFFS);
     const [departs, setDeparts] = useState(DEPARTMENTS);
 
+    const HomePage = () => {
+        return(
+            <Home staffs={staffs} departs={departs} 
+                setStaffs={setStaffs}
+                />
+        )
+    }
+    
     const StaffWithId = () => {
 
         let params = useParams();
@@ -26,7 +34,7 @@ function Main() {
         <div>
             <Header staffs={staffs} />
             <Routes>
-                <Route exact path="/staff" element={<Home staffs={staffs}/>} />
+                <Route exact path="/staff" element={<HomePage />} />
                 <Route exact path="/staff/:staffId" element={<StaffWithId/>} />
                 <Route exact path="*" element = {<Navigate to='/staff' />} />
                 <Route exact path="/depart" element={<Department departs = {departs} />} />

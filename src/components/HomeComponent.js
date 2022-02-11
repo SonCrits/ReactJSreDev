@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import { Card, CardBody, CardText, CardTitle, Input, Col, Button, Label, CardImg } from 'reactstrap';
-import {STAFFS} from '../shared/staffs';
-import dateFormat from 'dateformat'; 
 import {Link} from 'react-router-dom';
+import ButtonModal from './ModalComponent';
 
 function Home(props){
     
@@ -19,8 +18,6 @@ function Home(props){
         setSearchName(search.value);
         event.preventDefault();
     }
-
-
 
     const RenderStaffItem = ({staff,onClick}) => {
         return(
@@ -39,8 +36,6 @@ function Home(props){
         return staff.name.toLowerCase().indexOf(searchName.toLowerCase()) !== -1;
     })
 
-
-
     // map toàn bộ STAFFS ra 1 mảng mới để render ra trang,
     // bên trong key từng nv, hàm onClick lấy tham số là staff của từng nv đã dk render ra
     const StaffList = filterStaff.map((staff) => {
@@ -51,12 +46,11 @@ function Home(props){
         )
     })
 
-
     // hàm trả về của Home function
     return(
         <div className='container'>
             <div className='row m-4'>
-                <Label md={2}><h5>Chọn số cột hiển thị</h5></Label>
+                <Label md={1}><h5>Số Cột</h5></Label>
                 <Col md={2}>
                     <Input type='select'
                         onChange={e => ChangeCol(e.target.value)}
@@ -67,7 +61,12 @@ function Home(props){
                         <option value={2}>5 cột</option>
                     </Input>
                 </Col>
-                <Col md={{size:2,offset:3}}>
+                <Label md={2}><h5>Nhân Viên</h5></Label>
+                <Col md={1}>
+                    <ButtonModal staffs={props.staffs} departs={props.departs}
+                        setStaffs={props.setStaffs}/>
+                </Col>
+                <Col md={{size:2}}>
                     <Input type='text' name='search' id='search'
                     //   onChange={e => ChangeSearch(e.target.value)}
                         innerRef={(input) => (search = input)} 
