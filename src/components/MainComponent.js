@@ -20,7 +20,7 @@ function Main(props) {
 
 
     const [staffs, setStaffs] = useState(props.staffs);
-    const [departs, setDeparts] = useState(props.staffs);
+    const [departs, setDeparts] = useState(props.departs);
 
     const HomePage = () => {
         return(
