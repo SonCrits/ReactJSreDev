@@ -1,0 +1,60 @@
+Bước 1 : Tạo action
+    redux => create file name ActionTypes.js
+        ActionTypes.js {nơi thực hiện các Redux Action và những action creater}
+            export 1 hằng số ADD_COMMENT và xuất 1 chuỗi 'ADD_COMMENT'
+                => xuất nhiều hằng số, mỗi hằng số gắn với 1 string và là 1 hành động tương ứng
+                => đây là nơi có thể nhập các loại hành động này vào các chức năng reduive và sau đó
+                sử dụng nó để thực hiện kết hợp trong lệnh switch mà bạn sử dụng ở đó
+                => đó là lý do tạo các tập tin ở đây
+    redux => create file name ActionCreators.js
+        ActionCreator file ( nơi chuẩn hóa tất cả ActionType vào ActionCreator)
+            => import tất cả mọi thứ được xuất bên ActionTypes
+            export 1 function addComment ( 1 hàm tạo ra 1 action object) trả về 1 object
+                4 tham số : dishId, rating, author, comment
+                    => đây cũng là những giá trị cần được truy xuất trong function này
+                type (kiểu action) : điều đầu tiên cần define
+                    => nơi dựng các kiểu action ở đây, có thể dễ dàng define type để Redux
+                    ActionTypes.ADD_COMMENT
+                payload (tải trọng)
+                    dishId : dishId,
+                    rating: rating,
+                    author: author,
+                    comment: comment
+                    => ánh xạ chúng vào 4 thuộc tính bên trong payload < 4 thuộc tính này sẽ dk xử lý >
+                gửi action này đến store
+    redux => comments.js
+        import toàn bộ ActioTypes
+            thêm 1 nhánh action vào trong switch
+            switch
+                case ActionTypes.ADD_COMMENT
+                    comment = action.payload. payload ở đây gồm có comment, author, rating và dishId
+                        comment.id = state.length; (state = COMMENTS)
+                        comment.date = new Date().toISOString();
+                        return state.concat(comment)
+
+Bước 2 : sử dụng nó
+    MainComponent
+        cần phải lập dispatch để nó gửi đi
+        import addComment form redux/ActionCreator
+        tạo hàm mapDispatchToProps
+            nhận dishpatch làm tham số
+                addComment: (dishId,rating,author,comment) => dishpatch(addComment(dishId,rating,author,comment))
+                => trả về action object để thêm 1 comment . action object sau đó dk đưa ra như là 1 tham số cho chức năng dispatch ở đây
+        kết nối mapDispatchToProps với main
+        kết nối addComment với các thành phần của Main
+        DishDetail
+            addComment={this.props.addComment}
+    DishDetailComponent
+        DishDetai >> return >> RenderComments
+            addComment={props.addComment}
+            dishId={props.dish.id}
+        RenderComments
+            nhận thêm 2 tham số addComents và dishId => chuyển trực tiếp nó đến Comment Form
+                CommentForm 
+                    dishId={dishId} addComents={addComents}
+    CommentFormComponent
+        handleSubmit
+            this.props.addComents(this.props.dishId, values.rating , values.author, values.comment)
+                    
+
+
