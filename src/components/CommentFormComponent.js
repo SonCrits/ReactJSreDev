@@ -30,7 +30,7 @@ class CommentForm extends Component{
         console.log('Current State is : ' +JSON.stringify(values))
         this.props.addComment(
             this.props.dishId, values.rating, values.author, values.comment
-        );
+        )
     }
 
    

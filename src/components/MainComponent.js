@@ -10,6 +10,8 @@ import About from './AboutComponent';
 import {connect} from 'react-redux';
 import { addComment } from '../redux/ActionCreator';
 
+
+// hàm map state từ redux sang react
 const mapStateToProps = state => {
   return {
     dishes : state.dishes,
@@ -19,10 +21,11 @@ const mapStateToProps = state => {
   }
 }
 
+// hàm map dispatch từ redux sang
 const mapDispatchToProps = dispatch => ({
-  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
-});
-
+  addComment: (dishId, rating, author, comment) =>
+    dispatch(addComment(dishId, rating, author, comment))
+})
 
 class Main extends Component{
   constructor(props){
@@ -31,6 +34,7 @@ class Main extends Component{
 
   render() {
 
+    // Home và những props
     const HomePage = () => {
       return(
         <Home
@@ -40,16 +44,20 @@ class Main extends Component{
       )
     }
 
+    // DishDetail và những props
     const DishWithId = ({match}) => {
       return(
         <DishDetail
-          dish = {this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
-          comments = {this.props.comments.filter((comment) => comment.dishId  === parseInt(match.params.dishId,10))}
-          addComment = {this.props.addComment}  
+          dish = {this.props.dishes.filter(
+            (dish) => dish.id === parseInt(match.params.dishId,10))[0]}
+          comments = {this.props.comments.filter(
+            (comment) => comment.dishId  === parseInt(match.params.dishId,10))} 
+          addComment = {this.props.addComment}
         />
       )
     }
 
+    // Route Page
     return(
       <div>
         <Header />
