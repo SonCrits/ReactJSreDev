@@ -6,6 +6,7 @@ Redux
         => CreateStore, lấy enhancer làm tham số thứ 2 => chúng là applymiddleware
             trong đó lại lấy thunk, logger làm tham số
                 thunk, logger hỗ trợ cho store. còn hỗ trợ như nào thì chưa biết
+                reply : hỗ trợ thêm hành động bổ sung
     
     B2: thêm 1 vài action thunk( hành động bổ sung ) vào app 
         ActionTypes.js => các kiểu action sẽ tập hợp ở đây
@@ -18,8 +19,8 @@ Redux
             export thêm  1 arrow function fetchDishes. điều này như 1 thunk ( hành động bổ sung)
                 thêm 1 function vô danh, lấy dishpatch làm tham số
             => fetchDishes là 1 thunk
-                dispatch(dishesLoading(true)) => giá trị khởi đầu của dishesLoading
-                setTimeout(() => {dispatch(addDishes(DISHES))},2000) => sau 2 s thÌ sẽ gửi hành động dispatch thêm món ăn vào mảng DISHES
+                dispatch(dishesLoading(true)) => gửi dispatch dishesLoading
+                setTimeout(() => {dispatch(addDishes(DISHES))},2000) => sau 2 s thÌ sẽ gửi dispatch hàm addDishes vào mảng DISHES
             export thêm 1 arow function dishesLoading 
                 type : action loading từ ActionTypes
             export dishesFailed nhận errMess làm tham số.
@@ -27,6 +28,7 @@ Redux
                 payload : errmess
             export addDishes lấy dishes làm tham số
                 type : add dishes của ActionTypes
+                payload : dishes
         dishes.js => cài đặt các hành động liên quan đến dish
             import mọi thứ từ ActionTypes
             state  {isLoading: true, errMes: null, dishes: [] }
