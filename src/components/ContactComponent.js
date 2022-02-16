@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem,
-    Button,  Label , Col, Row, 
+    Button,  Label , Col, Row,
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
-import {Control,LocalForm,Errors} from 'react-redux-form';
+import {Control,LocalForm,Errors, actions, Form} from 'react-redux-form';
 
 // khai báo các lỗi và cài đặt các trường hợp xảy ra lỗi cho form
 const required = (val) => val && val.length;
-const maxLength = (len) => (val) => !(val) || (val.length <= len);
-const minLength = (len) => (val) => val && (val.length >= len);
+const maxLength = (len) => (val) => !val || val.length <= len;
+const minLength = (len) => (val) => val && val.length >= len;
 const isNumber = (val) => !isNaN(Number(val));
-const validEmail = (val) => /^[A-Z0-9._%+-] + @[A-Z0-9._%+-]+\.[A-Z]{2,4}$/i.test(val);
+const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9._%+-]+\.[A-Z]{2,4}$/i.test(val);
 
 class Contact extends Component {
 
@@ -22,7 +22,9 @@ class Contact extends Component {
 
     // Buton Submit hiện lên bảng cảnh báo giá trị values trong form vừa nhập
     handleSubmit(values) {
-        alert('Current is ' +JSON.stringify(values));
+        console.log("Current State is: " + JSON.stringify(values));
+        alert("Current State is: " + JSON.stringify(values));
+        this.props.resetFeedbackForm();
     }
   
     render() {    
@@ -71,7 +73,7 @@ class Contact extends Component {
                     </div>
                     {/* form */}
                     <div className='col-12 col-sm-9'>
-                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                        <Form model='feedback' onSubmit={(values) => this.handleSubmit(values)}>
                             {/* firstName */}
                             <Row className='form-group'>
                                 <Label htmlFor='firstname' md = {2}>First Name</Label>
@@ -138,14 +140,16 @@ class Contact extends Component {
                                         placeholder='Email'
                                         className='form-control' 
                                         validators={{
-                                            required ,
+                                            required,
                                             validEmail
-                                        }}/>
+                                        }}
+                                    />
                                     <Errors className='text-danger' show='touched' model='.email'
                                         messages={{
                                             required : 'Required',
                                             validEmail : 'Invalid Email Adress'
-                                        }} />
+                                        }} 
+                                    />
                                 </Col>
                             </Row>
                             {/* Checkbox + select ContacType */}
@@ -184,7 +188,7 @@ class Contact extends Component {
                                     </Button>
                                 </Col>
                             </Row>
-                        </LocalForm>
+                        </Form>
                     </div>
                 </div>
             </div>

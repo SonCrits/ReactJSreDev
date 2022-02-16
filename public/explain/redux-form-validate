@@ -32,6 +32,6 @@ React:
         Route => contact Component
             chuyển thành hàm mũi tên. thêm props resetFeedbackForm
     CommentComponent.js
-        import thêm action from react-redux-form
+        import thêm action, Form from react-redux-form
         hàm submit thêm this.props.resetFeedbackForm()
         Form thêm model={"feedback"}
