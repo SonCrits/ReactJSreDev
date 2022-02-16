@@ -5,7 +5,7 @@ import {Breadcrumb, BreadcrumbItem,
 import {Link} from 'react-router-dom';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 
-
+// khai báo các lỗi và cài đặt các trường hợp xảy ra lỗi cho form
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -17,37 +17,17 @@ class Contact extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            firstname : '',
-            lastname : '',
-            telnum : '',
-            email : '',
-            agree : false,
-            contactType : 'Tel',
-            message : '',
-            touched : {
-                firstname : false,
-                lastname : false,
-                telnum : false,
-                email : false
-            }
-        }
-
         this.handleSubmit = this.handleSubmit.bind(this);    
     }
 
-    
-
+    // Buton Submit hiện lên bảng cảnh báo giá trị values trong form vừa nhập
     handleSubmit(values) {
         alert('Current is ' +JSON.stringify(values));
     }
-
-   
-   
-    render() {
-
-       
+  
+    render() {    
         return(
+            // info
             <div className="container">
                 <div className='row'>
                     <Breadcrumb>
@@ -89,8 +69,10 @@ class Contact extends Component {
                     <div className='col-12'>
                         <h3>Send us your Feedback</h3>
                     </div>
+                    {/* form */}
                     <div className='col-12 col-sm-9'>
                         <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                            {/* firstName */}
                             <Row className='form-group'>
                                 <Label htmlFor='firstname' md = {2}>First Name</Label>
                                 <Col md={10}>
@@ -110,6 +92,7 @@ class Contact extends Component {
                                         }} />
                                 </Col>
                             </Row>
+                            {/* last Name */}
                             <Row className='form-group'>
                                 <Label htmlFor='lastname' md={2}>Last Name</Label>
                                 <Col md={10}>
@@ -129,6 +112,7 @@ class Contact extends Component {
                                         }} />
                                 </Col>
                             </Row>
+                            {/* Tel Num */}
                             <Row className='form-group'>
                                 <Label htmlFor='telnum' md={2}>Tel Num</Label>
                                 <Col md={10}>
@@ -146,6 +130,7 @@ class Contact extends Component {
                                         }} />
                                 </Col>
                             </Row>
+                            {/* Email */}
                             <Row className='form-group'>
                                 <Label htmlFor='email' md={2}>Email</Label>
                                 <Col md={10}>
@@ -163,6 +148,7 @@ class Contact extends Component {
                                         }} />
                                 </Col>
                             </Row>
+                            {/* Checkbox + select ContacType */}
                             <Row className='form-group'>
                                 <Col md={{size : 6,offset:2}}>
                                     <div className='form-check'>
@@ -181,6 +167,7 @@ class Contact extends Component {
                                         </Control.select>
                                 </Col>
                             </Row>
+                            {/* message */}
                             <Row className='form-group'>
                                 <Label htmlFor="message" md={2}>Your Feedback</Label>
                                 <Col md={10}>
@@ -189,6 +176,7 @@ class Contact extends Component {
                                         className='form-control' />
                                 </Col>
                             </Row>
+                            {/* Button submit Form */}
                             <Row className='form-group'>
                                 <Col md={{size : 10,offset:2}}>
                                     <Button type='submit' color='primary'>

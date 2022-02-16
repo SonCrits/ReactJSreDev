@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 function About(props) {
 
+    // khai báo biến leaders là map toàn bộ mảng leaders
     const leaders = props.leaders.map((leader) => {
         return (
             <div key={leader.id} className='col-12 mt-5'>
@@ -25,6 +26,7 @@ function About(props) {
 
     
 
+    // return về 1 vài thông tin cùng với danh sách leaders
     return(
         <div className="container">
             <div className="row">

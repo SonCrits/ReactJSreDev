@@ -33,6 +33,7 @@ class Main extends Component{
     super(props);
   }
 
+  // khởi động page băng fetchDishes 1 lần duy nhất
   componentDidMount() {
     this.props.fetchDishes();
   }

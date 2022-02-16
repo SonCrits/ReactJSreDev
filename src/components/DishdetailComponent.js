@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import CommentForm from './CommentFormComponent';
 import { Loading } from './LoadingComponent';
 
-
+// layout DishImage
 function RenderDish ({dish}) {
   if(dish != null) {
     return(
@@ -23,6 +23,7 @@ function RenderDish ({dish}) {
   } else return <div></div>
 }
 
+// layout comment
 function RenderComment({comments, dishId, addComment}) {
   if(comments != null) {
     return(
@@ -51,6 +52,11 @@ function RenderComment({comments, dishId, addComment}) {
   } else return <div></div>
 }
 
+// lay out DishDetail Page. 
+// nếu là isloading thì trả về Load..
+// nếu là errMess thì trả về errMess
+// nếu dish k rỗng thì trả về layout gồm dish image và dish comment
+// nếu k có gì thì trả về div rỗng
 const DishDetail = (props) => {
   if(props.isLoading) {
     return(

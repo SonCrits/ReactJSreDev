@@ -2,6 +2,11 @@ import React from 'react';
 import { Card, CardBody, CardImg, CardText, CardTitle, CardSubtitle } from 'reactstrap';
 import { Loading } from './LoadingComponent';
 
+
+// layOut Item gồm Image - Title - designation
+// nếu là isloading thì trả về Load..
+// nếu là errMess thì trả về errMess
+// nếu dish k rỗng thì trả về layout gồm dish image và dish comment
 function RenderItem({item, isLoading, errMess}){
     if(isLoading) {
         return (
@@ -25,6 +30,7 @@ function RenderItem({item, isLoading, errMess}){
     )
 }
 
+// HomePage trả về 3 Mục : dish - promotion - leader
 function Home(props) {
     return(
         <div className='container'>

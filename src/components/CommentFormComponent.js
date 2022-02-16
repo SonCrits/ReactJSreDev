@@ -4,6 +4,8 @@ import { Modal,ModalHeader, ModalBody,
 } from "reactstrap";
 import {LocalForm, Control, Errors} from 'react-redux-form';
 
+
+// khai báo các lỗi và cài đặt lỗi
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -20,12 +22,14 @@ class CommentForm extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    // trạng thái Open Modal
     toggleModal(){
         this.setState({
             isModalOpen : !this.state.isModalOpen
         });
     }
 
+    // trạng thái Submit Comment gửi đi
     handleSubmit(values){
         console.log('Current State is : ' +JSON.stringify(values))
         this.props.addComment(
@@ -39,15 +43,19 @@ class CommentForm extends Component{
 
         return(
             <div>
+                {/* Button mở Modal */}
                 <Button onClick={this.toggleModal} color='primary'>
                     Send Feedback
                 </Button>
+                {/* Modal */}
                 <Modal isOpen = {this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>
                         <h4>Submit Comment</h4>
                     </ModalHeader>
                     <ModalBody>
+                        {/* Form */}
                         <LocalForm onSubmit ={(values) => this.handleSubmit(values)}>
+                            {/* Rating */}
                             <Row className='form-group'>
                                 <Label md={2} htmlFor='rating'>Rating</Label>
                                 <Col md={10}>
@@ -61,6 +69,7 @@ class CommentForm extends Component{
                                     </Control.select>
                                 </Col>
                             </Row>
+                            {/* Name */}
                             <Row className='form-group'>
                                 <Label md={2}>Your Name</Label>
                                 <Col md={10}>
@@ -80,6 +89,7 @@ class CommentForm extends Component{
                                     />
                                 </Col>
                             </Row>
+                            {/* Comment */}
                             <Row className='form-group'>
                                 <Label md={2} htmlFor='comment'>Comment</Label>
                                 <Col md={10}>
@@ -98,6 +108,7 @@ class CommentForm extends Component{
                                     />
                                 </Col>
                             </Row>
+                            {/* Button */}
                             <Row className='form-group'>
                                 <Col md={{size:4,offset:2}}>
                                     <Button type='submit' color='primary'>Submit</Button>

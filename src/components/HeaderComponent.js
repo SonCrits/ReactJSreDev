@@ -19,18 +19,21 @@ class Header extends Component {
         this.handleLogin = this.handleLogin.bind(this);
     }
 
+    // Open Nav Bar
     toggleNav(){
         this.setState({
             isNavOpen : !this.state.isNavOpen
         })
     }
 
+    // Open Login Form
     toggleModal(){
         this.setState({
             isModalOpen : !this.state.isModalOpen
         });
     }
 
+    // Button Login Form hiển thị values vừa nhập trong form
     handleLogin(event) {
         alert('username is :' + this.username.value +
         ' pass is : ' + this.password.value + 
@@ -43,6 +46,7 @@ class Header extends Component {
     render(){
         return(
             <div>
+                {/* Nav bar */}
                 <Navbar dark expand='md'>
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
@@ -77,6 +81,7 @@ class Header extends Component {
                                     </NavLink>
                                 </NavItem>
                             </Nav>
+                            {/* Button Open Login Form */}
                             <Nav navbar className='ml-auto'>
                                 <NavItem>
                                     <Button outline onClick={this.toggleModal}>
@@ -98,6 +103,7 @@ class Header extends Component {
                         </div>
                     </div>
                 </Jumbotron>
+                {/* Login Form */}
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>
                         Login

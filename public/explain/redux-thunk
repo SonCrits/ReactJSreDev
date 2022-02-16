@@ -1,5 +1,4 @@
 Redux
-
     B1: configureStore.js
         import thunk , logger, applymiddleware
         áp dụng cho store
@@ -40,12 +39,9 @@ Redux
                 return {...state, isLoading, errMes, dishes} => tắt isLoading, bật errMess = action.payload, dishes vẫn là 1 mảng rỗng
 
 
-
 React
-
     B1 : tạo 1 component spiner giống kiểu loading
-        Create LoadingComponent.js => component này sẽ dk sử dụng mỗi khi gọi fetchDishes ở ActionCreators.js
-    
+        Create LoadingComponent.js => component này sẽ dk sử dụng mỗi khi gọi fetchDishes ở ActionCreators.js   
     B2 : Edit
         MainComponent.js =>
             import thêm fetchDishes
@@ -92,6 +88,3 @@ React
                 else if props.dishes.errMess
                     return errMess
     
-
-
-       
