@@ -1,0 +1,37 @@
+Mục Đích của bài :
+    state của form được tồn tại trong Redux Store thay vì state trong component
+    => update Feedback Form
+
+
+
+Redux:
+
+    create forms.js:
+        export 1 const InitialFeedback
+            gồm giá trị (firstname, lastname, telnum, email, agree, contactType, message)
+
+    configureStore.js:
+        mục tiêu bài này 
+            cấu hình redux để lưu trữ các trạng thái
+        import createForms react-redux-form
+        vào mục combineReducer thêm state
+            ...createForms({
+                feedback  InitialFeedback => thông tin từ forms.js ở trên
+            })
+                **   * lý do đặt feedback = initialFeedback form sẽ về trạng thái ban đầu sau khi submit form
+
+
+
+
+React:
+
+    MainComponent.js:
+        import actions from react-redux-form
+        thêm 1 dispatch resetFeedbackForm với giá trị là dispatch actions.reset('feedback')
+            => form sẽ dk đặt tên là feedback 
+        Route => contact Component
+            chuyển thành hàm mũi tên. thêm props resetFeedbackForm
+    CommentComponent.js
+        import thêm action from react-redux-form
+        hàm submit thêm this.props.resetFeedbackForm()
+        Form thêm model={"feedback"}
