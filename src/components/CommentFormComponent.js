@@ -50,7 +50,7 @@ class CommentForm extends Component{
                 {/* Modal */}
                 <Modal isOpen = {this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>
-                        <h4>Submit Comment</h4>
+                        Submit Comment
                     </ModalHeader>
                     <ModalBody>
                         {/* Form */}

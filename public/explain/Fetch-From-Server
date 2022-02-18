@@ -1,0 +1,95 @@
+Mục tiêu
+    học cách chứa Fetch trong app React và sau đó sử dụng nó để giao tiếp với 
+        REST API server
+Đầu Ra 
+    cách chứa Fetch vào app React
+    Sử dụng Fetch giao tiếp với REST API sv 
+
+==============================================================================
+
+
+Hướng dẫn
+-------------------------------
+    cài đặt
+        cài đặt Fetch cho dự án
+            yarn add cross-fetch@2.1.0
+        config app để kết nối với sv 
+            tạo 1 file có tên baseUrl.js ở shared folder
+                export const baseUrl = 'http://localhost:3001';       
+        đảm bảo json sv đang hoạt động
+
+
+---------------------------------
+    Redux
+
+        ActionTypes.js
+            export const ADD_COMMENTS = 'ADD_COMMENTS';
+            export const COMMENTS_FAILED = 'COMMENTS_FAILED';
+            export const PROMOS_LOADING = 'PROMOS_LOADING';
+            export const ADD_PROMOS = 'ADD_PROMOS';
+            export const PROMOS_FAILED = 'PROMOS_FAILED';
+
+        ActionCreator.js
+            import
+                import { baseUrl } from '../shared/baseUrl';
+            kết nối đến JSON sv dishes
+                return fetch(baseUrl + 'dishes')
+                .then(response => response.json())
+                .then(dishes => dispatch(addDishes(dishes)));
+            export 1 file fetchCommnets => kết nối với commnets json sv
+            export const commentsFailed => sự kiện kết nối comments failed
+            export const addComments => sự kiện add comments
+            export const fetchPromos => kết nối promotion json sv
+            export const promosLoading => load promos
+            export const promosFailed => sk kết nối thất bại tới pro json sv
+            export const addPromos => sk add promo
+        
+        comments.js
+            update tương tự dishes.js
+        
+        promotions.js
+            update tương tự dishes.js
+
+
+------------------------------------
+
+    React
+
+        MainComponent.js    
+            import
+                add fetchCommnets, fetchPromos
+            update mapDispatchToProps
+                add fetchCommnets
+                add fetchPromos
+            update componentDidMount
+                add fetchCommnets
+                add fetchPromos
+            update Homepage
+                update promotion
+                add promotionLoading
+                add promotionErrMess
+            update DishWithId
+                update comments
+                add commentsErrMess
+
+        MenuComponent.js
+            import 
+                baseUrl
+            CardImg
+                update src = {baseUrl + dish.image}
+
+        HomeComponent.js
+            import 
+                baseUrl
+            CardImg
+                update src = {baseUrl + dish.image}
+            RenderItem
+                update promotion Render
+                    add isLoading
+                    add errMess  
+
+        DishDetailComponent.js
+            import
+                baseUrl
+            CardImg
+                update src = {baseUrl + dish.image}   
