@@ -1,0 +1,73 @@
+ContactComponent.js
+    import React
+    function Contact tham số props
+    return 
+        div className container
+            div className row row-content
+                div className col-12
+                    h3 Location Infomation
+                div className col-12 col-sm-4 offset-sm-1
+                    h5 Our Adress
+                    <adress>
+                        121, Clear Water Bay Road <br
+                        Clear Water Bay , Kowloon   <br
+                        Hong KOng <br
+                        i className fa phone
+                        i className fa fax
+                        i className fa envelope
+                div className col-12 col-sm-6 offset-sm-1
+                    h5 Map of our Location
+                div className col-12 col-sm-11 offset-sm-1
+                    div className btn-group role group
+                        a role=button className=btn btn-primary
+                        a role=button className=btn btn-info
+                        a role=button className=btn btn-success
+
+***
+
+MainComponent
+    import Contact
+    <Route exact path='/contactus' component = {Contact}
+
+***
+------------------------------------------------------------------------------------------
+
+
+HomeComponent.js
+
+    tạo 1 hàm layout Card RenderCard với tham số item
+        return về
+            Card
+                CardIMG
+                CardBody
+                    CardTitle 
+                    CardText
+    tạo 1 hàm Home layout page với tham số props
+        return về
+            div class container
+                div class row align-items-start
+                    div className col-12 col-md m-1
+                        RenderCard item = props.dish
+                    div className col-12 col-md m-1
+                        RenderCard item = props.promotion
+                    div className col-12 col-md m-1
+                        RenderCard item = props.leader
+    export Home
+
+
+
+***
+
+MainComponent
+
+    truyền các tham số thông qua props ở HomeComponent
+        thêm state
+            dishes: DISHES,
+            comments: COMMENTS,
+            promotions: PROMOTIONS,
+            leaders: LEADERS 
+        HomePage
+            dish = this.state.dish.filter(dish => dish.featured)[0]
+            promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
+            leader={this.state.leaders.filter((leader) => leader.featured)[0]}
+            => giá trị của dish = (lọc filter trong mảng DISHES với dish ở đây bằng dish.featured với giá trị là true)

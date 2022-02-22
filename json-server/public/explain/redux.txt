@@ -1,0 +1,28 @@
+redux là 1 thư viện của JS kết hợp hoàn hảo với REact 
+
+lý do dùng redux 
+    nếu k dùng redux mà dùng ReactJS thì sẽ phải truyền state từng bước 1 trong các node trong mạng lưới component
+    Ngược lại, chúng ta có thể tạo 1 store rồi dispatch một action từ node về store rồi các state ở component khác chỉ cần conect tới store và cập nhật data
+nguyên lý của redux
+    Trạng thái ( state ) của ứng dụng được lưu trong 1 store duy nhất là Object mô hình tree
+    Chỉ có 1 cách duy nhất để thay đổi state đó là tạo ra 1 action ( là 1 obj mô tả những gì xảy ra)
+    Để chỉ rõ trạng thái ( state ) tree dk thay đổi bởi 1 action, bạn phải viết pure reducers
+Cách sử dụng redux cơ bản
+    Redux có 4 thành phần chính ( store, Views, Actions, Reducers)
+        Store : nơi quản lý state, có thể truy cập để lấy state ra, update state hiện có, và listener để nhận biết xem có thay đổi gì không, sau đó cập nhật qua viewr
+                import { createStore } from 'redux';
+                ...
+                const store = createStore(myReducer);
+                console.log('Default:', store);
+            getState() giúp lấy ra state hiện tại
+            dispatch(action) thực hiện gọi 1 action
+            subscrible(listener) luôn lắng nghe xem có thay đổi gì ko , rồi ngay lập tức render qua view
+        Action : nó là 1 pure object định nghĩa 1 thuộc tính lần lượt là
+            type : kiểu action. ví dụ như Toggle_status
+            payload : giá trị tham số và action creator truyền lên
+        Reducer: Khác với actions có chức năng mô tả những gì đã xảy ra, nó k chỉ rõ state nào của reponse thay đổi,
+            mà việc này là do reducer đảm nhiệm, nó là nơi xác định state sẽ thay đổi thế nào, sau đó trả ra một state mớfa-inverse
+        View : Hiển thị dữ liệu dk cung cấp bởi store
+
+=> nguyên lý hoạt động của redux   
+    action -> reducer -> store -> view

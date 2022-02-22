@@ -1,0 +1,90 @@
+Redux
+    B1: configureStore.js
+        import thunk , logger, applymiddleware
+        áp dụng cho store
+        => CreateStore, lấy enhancer làm tham số thứ 2 => chúng là applymiddleware
+            trong đó lại lấy thunk, logger làm tham số
+                thunk, logger hỗ trợ cho store. còn hỗ trợ như nào thì chưa biết
+                reply : hỗ trợ thêm hành động bổ sung
+    
+    B2: thêm 1 vài action thunk( hành động bổ sung ) vào app 
+        ActionTypes.js => các kiểu action sẽ tập hợp ở đây
+            thêm 1 vài action  
+                DISHES_LOADING : xảy ra khi các món ăn dk tìm, dk lấy
+                DISHES_FAILED : khi k thể lấy món ăn từ một máy chủ
+                ADD_DISHES : khi thêm món ăn vào cửa hàng     
+        ActionCreators.js => nơi giới thiệu thunk
+            cắt import DISHES từ dishes.js vào đây
+            export thêm  1 arrow function fetchDishes. điều này như 1 thunk ( hành động bổ sung)
+                thêm 1 function vô danh, lấy dishpatch làm tham số
+            => fetchDishes là 1 thunk
+                dispatch(dishesLoading(true)) => gửi dispatch dishesLoading
+                setTimeout(() => {dispatch(addDishes(DISHES))},2000) => sau 2 s thÌ sẽ gửi dispatch hàm addDishes vào mảng DISHES
+            export thêm 1 arow function dishesLoading 
+                type : action loading từ ActionTypes
+            export dishesFailed nhận errMess làm tham số.
+                type : dishes failed từ ActionTypes
+                payload : errmess
+            export addDishes lấy dishes làm tham số
+                type : add dishes của ActionTypes
+                payload : dishes
+        dishes.js => cài đặt các hành động liên quan đến dish
+            import mọi thứ từ ActionTypes
+            state  {isLoading: true, errMes: null, dishes: [] }
+            case ActionTypes.ADD_DISHES < khi thêm thành công >
+                return {...state, isLoading, errMes, dishes} isLoading tắt, errMes null , dishes : action.payload
+            case ActionTypes.DISHES_LOADING < khi có thay đổi thì sẽ dk chạy >
+                return {...state, isLoading, errMes, dishes} => chạy loading, errMes chưa có gì, dishes vẫn là 1 mảng rỗng
+            case ActionTypes,DISHES_FAILED < khi món ăn thể dk gọi hoặc lỗi >
+                return {...state, isLoading, errMes, dishes} => tắt isLoading, bật errMess = action.payload, dishes vẫn là 1 mảng rỗng
+
+
+React
+    B1 : tạo 1 component spiner giống kiểu loading
+        Create LoadingComponent.js => component này sẽ dk sử dụng mỗi khi gọi fetchDishes ở ActionCreators.js   
+    B2 : Edit
+        MainComponent.js =>
+            import thêm fetchDishes
+            mapDisToProps 
+                ánh xạ fetchDishes
+            create componentDidMount()
+                this.props.fetchDishes();
+            HomePage. thông tin món ăn sẽ k còn ở những đạo cụ này nữa
+                dish {this.props.dishes.dishes}
+                dishesLoading {this.props.dishes.isLoading}
+                dishesErrMess {this.props.dishes.errMes}
+            DishWithId
+                dish {this.props.dishes.dishes}
+                dishesLoading {this.props.dishes.isLoading}
+                dishesErrMess {this.props.dishes.errMes}
+        DishDetailComponent.js =>
+            import LoadingComponent
+                DishDetail
+                    if(props.isLoading)
+                        return div container row LoadingComponent
+                    else if props.errMess
+                        return div container row errMess
+                    else if props,dish != null
+                        return DishDetail
+        HomeComponent.js =>
+            import LoadingComponent
+            RenderCard
+                tham số thêm isLoad, errMess
+                if isLoading
+                    return Loading
+                else if errMess
+                    return errMess
+                else
+                    return RenderCard
+            Home > RenderCard dish
+                isLoading props.dishesLoading
+                errMess props.dishesErrMess
+        MenuComponent.js =>
+            import LoadingComponent
+            Menu
+                menu : props.dishes.dihes.map
+                if props.dihes.isLoading
+                    return Loading
+                else if props.dishes.errMess
+                    return errMess
+    

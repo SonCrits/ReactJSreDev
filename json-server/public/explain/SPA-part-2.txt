@@ -1,0 +1,14 @@
+MenuComponent.js
+    OnClick()
+        => remove ra khỏi thẻ Card
+        Render MenuItem cũng bỏ onClick ra
+        Làm sao để cập nhật nó vượt qua liên kết trong DishDetail như một tham số
+        import Link from react-router-dom
+        dùng thẻ Link bao quanh đoạn CARd trong function RenderMenuItem
+            Link to={`menu`${dish.id}}
+        Dùng breadcrumbItem để tạo tab chuyển đỏi giữa HOme và menu
+MainComponent.js
+    DishWithId
+        tham số match
+        return
+            DishDetail tham số dish = filter của state dishes với dish.id = parseInt của match.params.dishId

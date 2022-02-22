@@ -1,0 +1,138 @@
+Phần 1 : kết nối Route với React
+
+App.js
+    import BrowserRouter
+    Bao quanh thẻ Main với BrowserRouter
+HomeComponent.js
+    xây dựng presentation component với view của Home
+    function Home vs tham số props
+        return div có class container
+        thẻ h4 nội dung Home
+    export Home
+MainComponent.js 
+    (xây dựng react-router để điều hướng giữa Home và Menu)
+    import Home từ HomeComponent
+    import Switch , Route, Redirect from react-router-dom
+    config Main để điều hướng
+        xóa selectDish khởi state của Main
+        => tìm cách mới để điều hướng Dishdetail
+            xóa onSelectDish
+        vào render, xóa Dishdetail 
+            Xóa MenuComponent trong render
+            Thêm Switch trong Header / Footer
+                tạo Route đầu tiên là tab Home
+                    exact path='/home'
+                    component = HomePage
+                Route thứ 2 là Menu
+                    exact path='/menu'
+                    component = Menu
+                        * nếu nó chỉ là component k yêu cầu props dk truyền vào => chỉ cần chỉ định tên của Component
+                        => nó sẽ hoạt động tốt nhưng k cho phép truyền props cho MenuComponent
+                        => cần truyền vào props cho 1 component của route ở đây
+                            sau đó phải chuyển nó vào như 1 function component
+                                component = {() => <Menu dishes = {this.state.dishes} />}
+                        như vậy là đã thông qua dk 1 props là dishes dk truyền vào MenuComponent
+                    với hàm OnClick thì sao? chúng ta cần xử lý cách khác
+                => chúng ta có 2 route mà chúng ta xác định ở đây :
+                    HomeComponent
+                    MenuComponent
+                    cả 2 đều dk bao bọc bên trong switch component
+                        điều hướng bằng cách chỉ định url ở browser addess bar
+                Thêm Redirect chuyển hướng như tab mặc định
+                    to = '/home'
+                    => nếu route k khớp vs bất kỳ điều j trong switch như home hay menu, thì nó đều render lại tab Home
+            Define function HomePage cho Route Home
+                sử dụng arrow function
+                return Home từ HomeComponent
+                    đây là nơi truyền các atrribute hay props cho HomeComponent
+
+
+__________________________________________________________________________________________
+
+
+Phần 2 : định cấu hình của NavBar để điều hướng giữa các Route
+
+
+HeaderComponent.js
+
+    import Nav, NavBarToggler , Collapse , NavItem, Jumbotron
+        => là những thứ cần theo thứ tự để tạo các liên kết trong Navbar
+    import NavLink from react-router-dom
+        NavLink dùng để tạo liên kết với các Component, khớp với URL
+
+    Edit return
+        Navbar
+            thêm expand='md'
+                => hiển thị đầy đủ cho kích thước trung bình đến cực lớn từ md trở lên
+                Bootstrap cho chúng ta có thể thu gọn NavBar cho màn hình nhỏ và cực nhỏ
+                sẽ ứng dụng với NavBarToggler và Collapse
+            NavbarBrand
+                thêm className=mr-auto
+                    để trống lề bên trái càng nhiều càng tốt
+                    chuyển hết sang phải
+                tên nhà hàng => logo nhà hàng
+                    <img src='....' alt='Tennha hang' height = 30 width = 41
+            Điều hướng đến các view khác nhau
+            =>  Nav 
+                ánh xạ tới navbar trong bootstrap
+                    ???????
+                Xây dựng lớp điều hướng
+                => NavItem (Home)            
+                    Làm thế nào để điều hướng đến các View khác nhau
+                    => NavLink
+                        className='nav-link'
+                            => là lớp bootstrap liên kết thích hợp với nó đến thanh điều hướng
+                        to='/home'
+                            => nơi chỉ định URL mà nó sẽ đến
+                        Tạo icon cho NavItem
+                        => span
+                            className='fa fa-home fa-lg'
+                                => icon fasome bootstrap
+                        Thêm text cho dễ đọc
+                        => thêm văn bản thuần túy Home
+                => NavItem (About US)
+                    copy từ NavItem Home 
+                        sửa lại to='...' =>
+                        sửa lại icon => info
+                        sửa lại text
+                => NavItem (Menu)
+                    copy từ NavItem Home 
+                        sửa lại to='...' =>
+                        sửa lại icon => list
+                        sửa lại text
+                => NavItem (Contact US)
+                    copy từ NavItem Home 
+                        sửa lại to='...' =>
+                        sửa lại icon => card
+                        sửa lại text
+            => đã xây dựng dk 4 view khác nhau với 4 url riêng biệt
+
+            Nhiệm vụ tiếp : chỉ hiện Nav toàn phần (đủ 4 item ) với màn hình trung bình đến cực lớn
+            ở màn hình cực nhỏ và nhỏ, nó sẽ thu gọn lại
+            => Sử dụng Collapse của Reactstrap
+                Bao quanh Nav bởi Collapse với bootstrap navbar
+                Chuyển đổi Collapse giữa bật và tắt
+                    iOpen = this.state.isNavOpen
+                        => nếu nó là false thì mọi thứ bên trong Collapse sẽ bị ẩn
+                        nếu nó là true, mọi thứ trong Collapse sẽ dk hiển thị
+                => thêm 1 button vào Navbar là Reactstrap NavBarToggler
+                NavBarToggler
+                    nút này sẽ chỉ hiển thị trên màn hình nhỏ đến cực nhỏ
+                    onClick = this.toggleNav
+                        => khi ấn vào đây thì sẽ hiển thị Nav
+            => Tạo state cho Collapse
+            => constructor
+                super(props)
+                this.state = {}
+                    isNavOpen : false
+            Define toggleNav
+                this.setState = (!this.state.isNavOpen)
+                    => phủ định lại nó
+            Tạo ràng buộc cho toggleNav
+                bind nó vào constructor
+FooterComponent.js
+    import Link 
+    đổi các thẻ a thành Link và href = các component tương ứng
+
+
+                

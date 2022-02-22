@@ -1,0 +1,63 @@
+Mục Đích :
+    Dùng fetch để đăng 1 comment lên máy chủ
+
+
+
+Redux
+    ActionCreator.js
+
+        thêm hàm postComment 
+            4 tham số
+                dishId, rating, author, comment
+            hàm mũi tên
+                tham số dispatch
+
+            tạo object newComment gồm 4 thuộc tính.
+                dishId, rating, author, comment
+                lấy 4 tham số của hàm postComment làm giá trị
+            ngày tháng của newComment :
+                sử dụng toISOString
+
+            return về fetch POST của link comment
+                body : newComment
+                header application/json
+                credentials : same
+
+                then
+                    tham số reponse
+                        điều kiện
+                            nếu reponse ok 
+                                trả về reponse
+                            ngược lại
+                                trả về error
+                                    var error = new error
+                                    error.reponse = reponse
+                                    throw error
+                then reponse => reponse.json
+                then reponse => dispatch(addComment)   
+                catch(error => console.log error)  , alert error
+
+        comments.js
+            xoá 2 dòng comment.id và commment.date đi
+
+
+
+
+React
+
+    MainComponent
+        import them postComment, gỡ addComment
+        mapDispatchToProps : addComment => postComment
+        DishWithId: addComment => postComment
+
+    DishDetailComponent.js
+        function RenderComment
+            addComment => postComment
+        CommentForm
+            addComment => postComment
+        classCommentForm
+            handleSubmit
+                addComment => postComment
+        render RenderComment
+            addComment => postComment
+        

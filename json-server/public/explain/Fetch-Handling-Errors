@@ -1,0 +1,19 @@
+Mục tiêu : thêm errMess
+
+ActionCreator.js
+
+dishes
+p1: phần xử lý lỗi dk return từ máy chủ
+sau khi fetch. nếu reponse mà ok. thì sẽ trả về reponse. 
+    => nó sẽ chạy đến then phía sau
+còn nếu không
+thì trả về error
+var error = new Error('Error' + reponse.status + ': ' + reponse.statusText);
+error.reponse = reponse;
+throw error => xử lý những trường hợp khác
+
+p2: phần này xử lý lỗi khi k nhận dk thông tin từ máy chủ
+khai báo 1 biến nữa là errmess = err.message
+throw errmess;
+
+tương tự với comments
