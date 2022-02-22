@@ -32,7 +32,7 @@ class CommentForm extends Component{
     // trạng thái Submit Comment gửi đi
     handleSubmit(values){
         console.log('Current State is : ' +JSON.stringify(values))
-        this.props.addComment(
+        this.props.postComment(
             this.props.dishId, values.rating, values.author, values.comment
         )
     }

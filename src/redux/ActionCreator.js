@@ -34,15 +34,43 @@ export const commentsFailed = (errMess) => ({
     payload : errMess
 });
 
-export const addComment = (dishId, rating, author, comment) => ({
+export const addComment = (comment) => ({
     type: ActionTypes.ADD_COMMENT,
-    payload: {
+    payload: comment
+});
+
+export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+    const newComment = {
         dishId: dishId,
         rating: rating,
         author: author,
         comment: comment
-    }
-});
+    };
+    newComment.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'comments', {
+        method: "POST",
+        body: JSON.stringify(newComment),
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+    .then(reponse => {
+        if(reponse.ok) {
+            return reponse;
+        } else {
+            var error = new Error('Error ' + reponse.status + ': ' + reponse.statusText);
+            error.reponse = reponse;
+            throw error;
+        }
+    }, error => {
+        throw error;
+    })
+    .then(reponse => reponse.json())
+    .then(reponse => dispatch(addComment(reponse)))
+    .catch(error => {console.log('post comments', error.message); alert('Your comment could not be posted\nError')})
+}
 
 
 // dishes
@@ -95,7 +123,7 @@ export const fetchProms = () => (dispatch) => {
         .then(reponse => {
             if(reponse.ok) {
                 return reponse;
-            } else{
+            } else {
                 var error = new Error(
                     'Error ' + reponse.status + ': ' + reponse.statusText
                 );
@@ -103,8 +131,8 @@ export const fetchProms = () => (dispatch) => {
                 throw error;
             }
         }, error => {
-            var errMess = new Error(error.message);
-            throw errMess;
+            var errmess = new Error(error.message);
+            throw errmess;
         })
         .then(reponse => reponse.json())
         .then(promos => dispatch(addPromos(promos)))
