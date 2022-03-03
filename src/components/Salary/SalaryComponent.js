@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody,
-     CardFooter, CardText, CardTitle, Input, Label,Col } from 'reactstrap';
+     CardFooter, CardText, CardTitle, Input, Label,Col 
+} from 'reactstrap';
+import { FadeTransform } from 'react-animation-components';
 
 function Salary({staffs}) {
     const basicSalary = 3000000;

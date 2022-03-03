@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import ButtonModal from './ModalComponent';
 import StaffList from './staffList';
 
+
 function Home(props){
     // console.log(props.staffs)
     
@@ -41,12 +42,13 @@ function Home(props){
 
     if(searchName !== '' && staffOfDepart === '1') {
         departFilter = props.staffs.filter(staff => {
-            staff.name.toLowerCase().includes(searchName.toLowerCase())
+            return staff.name.toLowerCase().indexOf(searchName.toLowerCase()) !== -1;
         })
-    } else if(searchName !== '') {
+    } 
+    else if(searchName !== '') {
         departFilter = props.staffs.filter(staff => {
-            staff.department === staffOfDepart &&
-            staff.name.toLowerCase().includes(searchName.toLowerCase())
+            return staff.departmentId.toLowerCase().indexOf(staffOfDepart.toLowerCase()) !== -1 && 
+                staff.name.toLowerCase().indexOf(searchName.toLowerCase()) !== -1;
         })
     }
 
@@ -83,8 +85,8 @@ function Home(props){
                 </Col>
                 <Label md={2}><h5>Thêm Nhân Viên</h5></Label>
                 <Col md={1}>
-                    <ButtonModal staffs={props.staffs} departs={props.departs}
-                        setStaffs={props.setStaffs}/>
+                    <ButtonModal 
+                        postStaff={props.postStaff}/>
                 </Col>
                 <Col md={{size:2}}>
                     <Input type='text' name='search' id='search'
@@ -103,6 +105,9 @@ function Home(props){
             <div className='row'>
                 <StaffList 
                     departFilter = {departFilter}
+                    fetchDelStaffs = {props.fetchDelStaffs}
+                    updateStaff={props.updateStaff}
+                    numOfCol={numOfCol}
                 />
             </div>
         </div>

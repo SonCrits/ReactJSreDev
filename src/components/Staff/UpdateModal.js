@@ -9,7 +9,7 @@ const maxLength = (len) => (val) => !val || val.length <= len;
 const isNumber = (val) => !isNaN(Number(val));
 const isDate = (val) => /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/i.test(val);
 
-function ButtonModal ({postStaff}) {
+function UpdateForm ({updateStaff, staff, id}) {
     const [openModal , setOpenModal] = useState(false);
     // const [staffs, setStaffs] = useState(props.staffs)
     
@@ -23,7 +23,8 @@ function ButtonModal ({postStaff}) {
 
     function handleSubmit(values) { 
 
-        postStaff(
+        updateStaff(
+            parseInt(id),
             values.name, 
             values.doB, 
             parseFloat(values.salaryScale),
@@ -40,10 +41,10 @@ function ButtonModal ({postStaff}) {
     return(
         <div>
             <Button color='primary' value='submit' onClick={toggleModal}>
-                <span className='fa fa-plus'></span>
+                <span className='fa fa-pencil-square '></span>
             </Button>
             <Modal isOpen={openModal} toggle={toggleModal}>
-                <ModalHeader toggle={toggleModal}>Thêm Nhân Viên</ModalHeader>
+                <ModalHeader toggle={toggleModal}>Chỉnh Sửa</ModalHeader>
                 <ModalBody>
                     <LocalForm onSubmit={(values) => handleSubmit(values)}>
                         <Row className="form-group">
@@ -170,7 +171,7 @@ function ButtonModal ({postStaff}) {
                         <Row className="form-group">
                             <Col className='py-2 my-3 text-center'>
                                 <Button color="primary" type="submit">
-                                    Submit
+                                    Xác Nhận
                                 </Button>
                             </Col>
                         </Row>
@@ -181,4 +182,4 @@ function ButtonModal ({postStaff}) {
     )
 }
 
-export default ButtonModal;
+export default UpdateForm;
