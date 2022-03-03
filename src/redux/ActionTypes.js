@@ -1,2 +1,5 @@
-export const ADD_STAFF = 'ADD_STAFF';
-export const ADD_STAFFS = 'ADD_STAFFS';
+export const RENDER_STAFF = 'RENDER_STAFF';
+
+export const RENDER_DEPART = 'RENDER_DEPART';
+
+export const RENDER_SALARY = 'RENDER_SALARY';

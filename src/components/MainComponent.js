@@ -1,58 +1,68 @@
-import React,{useState} from "react";
-import Header from "./HeaderComponent";
+import React,{Component, useEffect, useState} from "react";
+import Header from "./Layout/HeaderComponent";
 import {Route, Routes,Navigate, useParams,} from 'react-router-dom'
-import Home from "./HomeComponent";
-import Footer from "./FooterComponent";
-import StaffInfo from "./StaffInfoComponent";
-import Department from "./DepartComponent";
-import Salary from "./SalaryComponent";
+import Home from "./Staff/HomeComponent";
+import Footer from "./Layout/FooterComponent";
+// import StaffInfo from "./Staff/StaffInfoComponent";
+import Department from "./Depart/DepartComponent";
+import Salary from "./Salary/SalaryComponent";
 import {connect} from 'react-redux';
+import { thunk_fetchStaff, thunk_fetchDepart, thunk_fetchSalary } from "../redux/ActionCreators";
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         staffs : state.staffs,
-        departs : state.departs
+        departs : state.departs,
+        salary: state.salary
     }
 }
 
-function Main(props) {
+const mapDispatchToProps = (dispatch) => ({
+    thunk_fetchStaff: () => {dispatch(thunk_fetchStaff())},
+    thunk_fetchDepart: () => {dispatch(thunk_fetchDepart())},
+    thunk_fetchSalary: () => {dispatch(thunk_fetchSalary())}
+})
 
-
-
-    const [staffs, setStaffs] = useState(props.staffs);
-    const [departs, setDeparts] = useState(props.departs);
-
-    const HomePage = () => {
-        return(
-            <Home staffs={staffs} departs={departs} 
-                setStaffs={setStaffs}
-                />
-        )
+class Main extends Component {
+    
+    componentDidMount() {
+        this.props.thunk_fetchStaff();
+        this.props.thunk_fetchDepart();
+        this.props.thunk_fetchSalary();
     }
     
-    const StaffWithId = () => {
+    render() {
+        const HomePage = () => {
+            return(
+                <Home staffs={this.props.staffs.staffs} departs={this.props.departs.departs} 
+                    />
+            )
+        }
+    
+        // const StaffWithId = ({match}) => {
 
-        let params = useParams();
 
+        //     console.log(this.props.staffs.staffs)
+            
+        //     return(
+        //         <StaffInfo staff = {this.props.staffs.staffs.filter((staff) => staff.id === parseInt(match.params.staffId,10))[0]} />
+        //     )
+        // }
 
         return(
-            <StaffInfo staff = {staffs.filter((staff) => staff.id === parseInt(params.staffId,10))[0]} />
+            <div>
+                <Header/>
+                <Routes>
+                    <Route exact path="/staff" element={<HomePage />} />
+                    {/* <Route exact path="/staff/:staffId" element={<StaffWithId/>} /> */}
+                    <Route exact path="*" element = {<Navigate to='/staff' />} />
+                    <Route exact path="/depart" element={<Department departs = {this.props.departs.departs} />} />
+                    <Route exact path="/salary" element={<Salary staffs={this.props.salary.salary} />} />
+                </Routes>
+                <Footer />
+            </div>
         )
     }
-
-    return(
-        <div>
-            <Header staffs={staffs} />
-            <Routes>
-                <Route exact path="/staff" element={<HomePage />} />
-                <Route exact path="/staff/:staffId" element={<StaffWithId/>} />
-                <Route exact path="*" element = {<Navigate to='/staff' />} />
-                <Route exact path="/depart" element={<Department departs = {departs} />} />
-                <Route exact path="/salary" element={<Salary staffs={staffs} />} />
-            </Routes>
-            <Footer />
-        </div>
-    )
 }
 
-export default connect(mapStateToProps)(Main) ;
+export default connect(mapStateToProps,mapDispatchToProps)(Main) ;
