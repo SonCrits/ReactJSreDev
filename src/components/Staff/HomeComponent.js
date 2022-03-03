@@ -32,24 +32,23 @@ function Home(props){
         
     } 
     
-    // else {
-    //     departFilter = props.staffs.filter((staff) => {
-    //         staff.departmentId === staffOfDepart
-    //         // console.log(staffOfDepart)
-    //         // console.log(staff.departmentId)
-    //     })
-    // }
+    else {
+        departFilter = props.staffs.filter(staff => {
+            return staff.departmentId.toLowerCase().indexOf(staffOfDepart.toLowerCase()) !== -1;
+        });
+    }
+    
 
-    // if(searchName !== '' && staffOfDepart === '1') {
-    //     departFilter = props.staffs.filter(staff => {
-    //         staff.name.toLowerCase().includes(searchName.toLowerCase())
-    //     })
-    // } else if(searchName !== '') {
-    //     departFilter = props.staffs.filter(staff => {
-    //         staff.department === staffOfDepart &&
-    //         staff.name.toLowerCase().includes(searchName.toLowerCase())
-    //     })
-    // }
+    if(searchName !== '' && staffOfDepart === '1') {
+        departFilter = props.staffs.filter(staff => {
+            staff.name.toLowerCase().includes(searchName.toLowerCase())
+        })
+    } else if(searchName !== '') {
+        departFilter = props.staffs.filter(staff => {
+            staff.department === staffOfDepart &&
+            staff.name.toLowerCase().includes(searchName.toLowerCase())
+        })
+    }
 
     var departmentFilterLength = departFilter.length;
     
@@ -97,6 +96,9 @@ function Home(props){
                         <span className='fa fa-search'></span>
                     </Button>
                 </Col>
+            </div>
+            <div className='row m-3'>
+                Số Lượng nhân viên : {departmentFilterLength}
             </div>
             <div className='row'>
                 <StaffList 
