@@ -9,8 +9,6 @@ export default function ModalStaffInfo({ staff, id }) {
     id = '';
   }
   const [isOpen, setIsOpen] = useState(false);
-  console.log(staff.doB);
-  console.log(staff.startDate);
   return (
     <React.Fragment>
       <Button
